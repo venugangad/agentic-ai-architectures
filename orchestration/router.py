@@ -1,7 +1,7 @@
-# orchestration/router.py
+﻿# orchestration/router.py
 """
 Intelligence through Routing — orchestration/router.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Router types:
   AgentRouter      — keyword/regex rules, priority-ordered dispatch

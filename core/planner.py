@@ -1,7 +1,7 @@
-# core/planner.py
+﻿# core/planner.py
 """
 Strategic Planning — core/planner.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Data model:    PlanStep, Plan
 Interface:     BasePlanner (abstract)

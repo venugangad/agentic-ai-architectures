@@ -1,7 +1,7 @@
-# knowledge/memory_service.py
+﻿# knowledge/memory_service.py
 """
 Three-Tier Memory Service — knowledge/memory_service.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Tiers:     MemoryTier (SHORT_TERM · WORKING · LONG_TERM)
 Model:     MemoryEntry (content, tier, TTL, importance, recency)

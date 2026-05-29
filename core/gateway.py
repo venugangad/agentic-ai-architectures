@@ -1,7 +1,7 @@
-# core/gateway.py
+﻿# core/gateway.py
 """
 The Production LLM Gateway — core/gateway.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Config:          GatewayConfig (all tunable parameters)
 Errors:          BudgetError · RateLimitError · CircuitOpenError

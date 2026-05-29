@@ -1,5 +1,5 @@
-# monitoring/safety.py — Chapter 9: Safety, Guardrails, and Telemetry
-# Part of: The Agentic Spine companion repository
+﻿# monitoring/safety.py — Chapter 9: Safety, Guardrails, and Telemetry
+# Part of: The Agent Circuit companion repository
 from __future__ import annotations
 
 import re

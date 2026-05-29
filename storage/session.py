@@ -1,7 +1,7 @@
-# storage/session.py
+﻿# storage/session.py
 """
 State and Session Management — storage/session.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Data model:    SessionState, ConversationTurn
 Interface:     SessionService (abstract)

@@ -1,6 +1,6 @@
-# agnostic-agent-framework
+﻿# agnostic-agent-framework
 
-> Companion repository for **"The Agentic Spine"**  
+> Companion repository for **"The Agent Circuit"**  
 > *Engineering a Provider-Agnostic AI Framework from Scratch — in Running Python*
 
 ---

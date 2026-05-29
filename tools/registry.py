@@ -1,7 +1,7 @@
-# tools/registry.py
+﻿# tools/registry.py
 """
 The Action Surface — tools/registry.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 This module defines the universal tool contract, the FunctionTool wrapper,
 the central ToolRegistry, and the McpConnector for external tool ecosystems.

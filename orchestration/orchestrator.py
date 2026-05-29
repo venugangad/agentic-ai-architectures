@@ -1,5 +1,5 @@
-# orchestration/orchestrator.py — Chapter 10: Multi-Agent Orchestration & Shipping
-# Part of: The Agentic Spine companion repository
+﻿# orchestration/orchestrator.py — Chapter 10: Multi-Agent Orchestration & Shipping
+# Part of: The Agent Circuit companion repository
 from __future__ import annotations
 
 import asyncio

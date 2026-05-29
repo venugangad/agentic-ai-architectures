@@ -1,4 +1,4 @@
-name: CI
+﻿name: CI
 
 on:
   push:
@@ -72,7 +72,7 @@ jobs:
           import importlib.metadata
           v = importlib.metadata.version('agnostic-agent-framework')
           print(f'agnostic-agent-framework {v} installed successfully.')
-          print('The Agentic Spine is ready.')
+          print('The Agent Circuit is ready.')
           "
 
       - name: Upload build artifacts

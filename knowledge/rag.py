@@ -1,7 +1,7 @@
-# knowledge/rag.py
+﻿# knowledge/rag.py
 """
 Knowledge Retrieval: Agentic RAG — knowledge/rag.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 Data model:    Chunk, RetrievalResult, RetrievalRequest
 Chunking:      TextChunker (sentence-aware sliding window)

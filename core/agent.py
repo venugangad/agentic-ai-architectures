@@ -1,7 +1,7 @@
-# core/agent.py
+﻿# core/agent.py
 """
 The Core Agent Backbone — core/agent.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 This module defines the universal agent contract and the LlmAgent implementation.
 All orchestration, routing, and planning code in this framework calls BaseAgent —

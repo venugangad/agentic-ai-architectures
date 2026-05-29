@@ -1,15 +1,15 @@
-[build-system]
+﻿[build-system]
 requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name            = "agnostic-agent-framework"
 version         = "1.0.0"
-description     = "A provider-agnostic agentic AI framework — companion to 'The Agentic Spine'"
+description     = "A provider-agnostic agentic AI framework — companion to 'The Agent Circuit'"
 readme          = "README.md"
 requires-python = ">=3.11"
 license         = { text = "MIT" }
-authors         = [{ name = "The Agentic Spine" }]
+authors         = [{ name = "The Agent Circuit" }]
 keywords        = ["agentic-ai", "llm", "agent-framework", "multi-agent", "rag", "guardrails"]
 classifiers     = [
     "Development Status :: 4 - Beta",

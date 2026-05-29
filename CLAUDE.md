@@ -1,11 +1,11 @@
-# CLAUDE.md — agnostic-agent-framework
+﻿# CLAUDE.md — agnostic-agent-framework
 > Context file for AI-assisted development · Read before generating any code
 
 ---
 
 ## Project Purpose
 
-Provider-agnostic agentic AI framework built chapter-by-chapter in *The Agentic Spine*.
+Provider-agnostic agentic AI framework built chapter-by-chapter in *The Agent Circuit*.
 
 **Core invariant:** All LLM calls go through `LlmProvider` (defined in `core/llm.py`).
 Never import `openai`, `anthropic`, `google.generativeai`, or any provider SDK

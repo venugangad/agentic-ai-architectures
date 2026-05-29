@@ -1,4 +1,4 @@
-# Chapter 1: The Provider Abstraction Layer
+﻿# Chapter 1: The Provider Abstraction Layer
 
 > **Part I — The Foundation**
 > Estimated read time: 35 minutes | Diagrams: 3 | Code examples: 6
@@ -73,7 +73,7 @@ We also define two supporting data classes: `LlmMessage`, which represents a sin
 # core/llm.py
 """
 The Provider Abstraction Layer — core/llm.py
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 This module defines the universal contract that every LLM provider must satisfy.
 No agent, tool, or orchestrator in this framework imports a vendor SDK directly.
@@ -963,7 +963,7 @@ Now we put it all together. The demo in `examples/ch01_hello_multimodel/main.py`
 # examples/ch01_hello_multimodel/main.py
 """
 Chapter 1 Demo — The Provider Abstraction Layer
-The Agentic Spine: Engineering a Provider-Agnostic AI Framework
+The Agent Circuit: Engineering a Provider-Agnostic AI Framework
 
 What this demonstrates:
   - One interface (BaseLlm) works identically across four providers
@@ -1065,7 +1065,7 @@ async def demo_router(registry: LlmRegistry) -> None:
 
 async def main() -> None:
     print("\n╔══════════════════════════════════════════════════════════╗")
-    print("║   The Agentic Spine — Chapter 1: Provider Abstraction    ║")
+    print("║   The Agent Circuit — Chapter 1: Provider Abstraction    ║")
     print("╚══════════════════════════════════════════════════════════╝")
 
     # --- Direct provider demos ---

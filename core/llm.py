@@ -1,5 +1,5 @@
-# core/llm.py — SCAFFOLD (built fully in Chapter 1)
-# The Agentic Spine: Engineering a Provider-Agnostic AI Framework from Scratch
+﻿# core/llm.py — SCAFFOLD (built fully in Chapter 1)
+# The Agent Circuit: Engineering a Provider-Agnostic AI Framework from Scratch
 #
 # This file is a placeholder. The complete implementation with:
 #   - BaseLlm abstract interface

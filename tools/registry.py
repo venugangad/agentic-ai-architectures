@@ -20,8 +20,9 @@ import logging
 import time
 import types
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any, Callable, get_type_hints
+from typing import Any, get_type_hints
 
 log = logging.getLogger(__name__)
 
@@ -271,11 +272,11 @@ class FunctionTool(BaseTool):
         fn: Callable,
         name: str | None = None,
         description: str | None = None,
-    ) -> "FunctionTool":
+    ) -> FunctionTool:
         return cls(fn=fn, name=name, description=description)
 
     @classmethod
-    def register(cls, fn: Callable) -> "FunctionTool":
+    def register(cls, fn: Callable) -> FunctionTool:
         """Decorator: convert a function to a FunctionTool in place."""
         return cls(fn=fn)
 
@@ -294,7 +295,7 @@ class ToolRegistry:
         self._tools: dict[str, BaseTool] = {}
         self.namespace = namespace
 
-    def register(self, tool: BaseTool) -> "ToolRegistry":
+    def register(self, tool: BaseTool) -> ToolRegistry:
         if tool.name in self._tools:
             raise ToolRegistryError(
                 f"Tool '{tool.name}' is already registered in namespace '{self.namespace}'. "
@@ -309,14 +310,14 @@ class ToolRegistry:
         fn: Callable,
         name: str | None = None,
         description: str | None = None,
-    ) -> "ToolRegistry":
+    ) -> ToolRegistry:
         return self.register(FunctionTool.from_function(fn, name=name, description=description))
 
-    def deregister(self, name: str) -> "ToolRegistry":
+    def deregister(self, name: str) -> ToolRegistry:
         self._tools.pop(name, None)
         return self
 
-    def merge(self, other: "ToolRegistry", prefix: str = "") -> "ToolRegistry":
+    def merge(self, other: ToolRegistry, prefix: str = "") -> ToolRegistry:
         """Merge another registry, optionally prefixing tool names."""
         for tool in other.tools():
             wrapped = _PrefixedTool(tool, prefix) if prefix else tool
@@ -485,7 +486,7 @@ class McpConnector:
         self._process: asyncio.subprocess.Process | None = None
         self._request_id = 0
 
-    async def __aenter__(self) -> "McpConnector":
+    async def __aenter__(self) -> McpConnector:
         await self._connect()
         return self
 
@@ -535,7 +536,7 @@ class McpConnector:
             self._process.terminate()
             try:
                 await asyncio.wait_for(self._process.wait(), timeout=5.0)
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 self._process.kill()
 
     def _next_id(self) -> int:

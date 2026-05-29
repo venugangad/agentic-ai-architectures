@@ -8,11 +8,11 @@ import logging
 import time
 import uuid
 from collections import defaultdict
-from contextlib import contextmanager, asynccontextmanager
+from collections.abc import AsyncIterator, Iterator
+from contextlib import asynccontextmanager, contextmanager
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, AsyncIterator, Iterator, Protocol, runtime_checkable
-
+from typing import Any, Protocol, runtime_checkable
 
 # ── Span / Trace data model ───────────────────────────────────────────────────
 

@@ -18,8 +18,9 @@ import logging
 import time
 import uuid
 from abc import ABC, abstractmethod
+from collections.abc import AsyncGenerator
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Any, AsyncGenerator
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from core.agent import AgentContext, AgentEvent
@@ -357,7 +358,7 @@ class ThoughtNode:
     thought: str
     score: float = 0.0
     parent_id: str | None = None
-    children: list["ThoughtNode"] = field(default_factory=list)
+    children: list[ThoughtNode] = field(default_factory=list)
     is_terminal: bool = False
     action: str | None = None
     action_args: dict[str, Any] = field(default_factory=dict)
@@ -658,10 +659,10 @@ class PlanningAgent:
         self._planner = planner
         self.name = name
 
-    async def run_async(self, context: "AgentContext") -> "AsyncGenerator[AgentEvent, None]":
+    async def run_async(self, context: AgentContext) -> AsyncGenerator[AgentEvent, None]:
         return self._run(context)
 
-    async def _run(self, context: "AgentContext") -> "AsyncGenerator[AgentEvent, None]":
+    async def _run(self, context: AgentContext) -> AsyncGenerator[AgentEvent, None]:
         from core.agent import AgentEvent, EventType
         goal = context.user_message
 

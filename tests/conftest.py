@@ -1,11 +1,10 @@
 # tests/conftest.py — shared fixtures for all chapters
 from __future__ import annotations
 
-import asyncio
-import pytest
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
+import pytest
 
 # ── MockLlmProvider ────────────────────────────────────────────────────────────
 
@@ -32,7 +31,7 @@ class MockLlmProvider:
         self._default = default_response
         self.calls: list[list[Any]] = []   # captured call history
 
-    def queue(self, *responses: str) -> "MockLlmProvider":
+    def queue(self, *responses: str) -> MockLlmProvider:
         """Pre-load responses to be returned in order."""
         self._queue.extend(responses)
         return self

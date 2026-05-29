@@ -590,7 +590,7 @@ class RedisSessionService:
         session_id: str | None = None, initial_state: dict | None = None,
         metadata: dict | None = None,
     ) -> Any:
-        from storage.session import SessionState, SessionExistsError
+        from storage.session import SessionExistsError, SessionState
         sid = session_id or str(uuid.uuid4())
         key = self._key(app_name, user_id, sid)
         if await self._redis.exists(key):
@@ -693,7 +693,7 @@ class PostgresSessionService:
         session_id: str | None = None, initial_state: dict | None = None,
         metadata: dict | None = None,
     ) -> Any:
-        from storage.session import SessionState, SessionExistsError
+        from storage.session import SessionExistsError, SessionState
         sid = session_id or str(uuid.uuid4())
         session = SessionState(
             session_id=sid, user_id=user_id, app_name=app_name,

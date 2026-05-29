@@ -4,21 +4,18 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+
 import pytest
-from io import StringIO
+
 from monitoring.telemetry import (
-    SpanKind,
-    Span,
-    Trace,
-    TelemetryCollector,
     MetricKind,
     MetricPoint,
     MetricsRegistry,
-    StructuredLogger,
-    StdoutExporter,
     PrometheusExporter,
+    SpanKind,
+    StructuredLogger,
+    TelemetryCollector,
 )
-
 
 # ── TelemetryCollector ────────────────────────────────────────────────────────
 
@@ -55,9 +52,8 @@ class TestTelemetryCollector:
         collector = TelemetryCollector()
         trace = collector.start_trace("root")
 
-        with pytest.raises(ValueError):
-            with collector.span("failing_op") as span:
-                raise ValueError("test error")
+        with pytest.raises(ValueError), collector.span("failing_op") as _span:
+            raise ValueError("test error")
 
         assert trace.spans[0].status == "error"
         assert "ValueError" in trace.spans[0].error_msg
@@ -66,9 +62,8 @@ class TestTelemetryCollector:
         collector = TelemetryCollector()
         collector.start_trace("root")
 
-        with pytest.raises(RuntimeError):
-            with collector.span("op") as span:
-                raise RuntimeError("boom")
+        with pytest.raises(RuntimeError), collector.span("op") as span:
+            raise RuntimeError("boom")
 
         assert span.end_time is not None
 
@@ -87,9 +82,8 @@ class TestTelemetryCollector:
         collector = TelemetryCollector()
         trace = collector.start_trace("root")
 
-        with collector.span("level1") as l1:
-            with collector.span("level2") as l2:
-                pass
+        with collector.span("level1") as l1, collector.span("level2") as l2:
+            pass
 
         assert l1.parent_id == trace.root_span.span_id
         assert l2.parent_id == l1.span_id

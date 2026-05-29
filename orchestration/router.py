@@ -17,13 +17,13 @@ from __future__ import annotations
 import json
 import logging
 import re
-import time
+from collections.abc import AsyncGenerator
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, AsyncGenerator
+from typing import Any
 
 from core.agent import AgentContext, AgentEvent, BaseAgent, EventType
-from core.llm import BaseLlm, LlmConfig, LlmMessage, MessageRole
+from core.llm import LlmConfig, LlmMessage, MessageRole
 
 log = logging.getLogger(__name__)
 
@@ -97,12 +97,12 @@ class AgentRouter(BaseAgent):
         self._agents = agents
         self._fallback_agent = fallback_agent
 
-    def add_rule(self, rule: RouteRule) -> "AgentRouter":
+    def add_rule(self, rule: RouteRule) -> AgentRouter:
         self._rules.append(rule)
         self._rules.sort(key=lambda r: -r.priority)
         return self
 
-    def register_agent(self, name: str, agent: BaseAgent) -> "AgentRouter":
+    def register_agent(self, name: str, agent: BaseAgent) -> AgentRouter:
         self._agents[name] = agent
         self.sub_agents.append(agent)
         agent.parent_agent = self

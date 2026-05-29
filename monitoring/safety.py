@@ -5,10 +5,10 @@ from __future__ import annotations
 import re
 import time
 import uuid
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Callable
-
+from typing import Any
 
 # ── severity & policy ─────────────────────────────────────────────────────────
 

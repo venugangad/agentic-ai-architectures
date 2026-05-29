@@ -1,23 +1,22 @@
 # tests/ch09/test_safety.py — Chapter 9: Safety, Guardrails, and Telemetry
 from __future__ import annotations
 
-import pytest
 import time
+
+import pytest
+
 from monitoring.safety import (
-    Severity,
-    SafetyPolicy,
-    SafetyViolation,
+    ApprovalStatus,
+    CheckpointPausedError,
+    ContentFilter,
+    HumanCheckpoint,
     PIIDetector,
     PromptInjectionDetector,
-    ContentFilter,
     SafetyError,
     SafetyMonitor,
-    CheckpointPausedError,
-    ApprovalStatus,
-    CheckpointRecord,
-    HumanCheckpoint,
+    SafetyPolicy,
+    Severity,
 )
-
 
 # ── PIIDetector ────────────────────────────────────────────────────────────────
 

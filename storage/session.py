@@ -39,7 +39,7 @@ class ConversationTurn:
                 "agent_name": self.agent_name, "turn_id": self.turn_id, "metadata": self.metadata}
 
     @classmethod
-    def from_dict(cls, d: dict) -> "ConversationTurn":
+    def from_dict(cls, d: dict) -> ConversationTurn:
         return cls(role=d["role"], content=d["content"], timestamp=d.get("timestamp", time.time()),
                    agent_name=d.get("agent_name", ""), turn_id=d.get("turn_id", str(uuid.uuid4())[:8]),
                    metadata=d.get("metadata", {}))
@@ -122,7 +122,7 @@ class SessionState:
         }
 
     @classmethod
-    def from_dict(cls, d: dict) -> "SessionState":
+    def from_dict(cls, d: dict) -> SessionState:
         session = cls(
             session_id=d["session_id"], user_id=d["user_id"], app_name=d.get("app_name", "default"),
             max_history_turns=d.get("max_history_turns", 50), state=d.get("state", {}),
@@ -284,7 +284,7 @@ class FileSessionService(SessionService):
 
 # ── SessionRunner — complete lifecycle wrapper ──
 
-from core.agent import AgentContext, AgentEvent, BaseAgent, EventType
+from core.agent import AgentContext, BaseAgent
 
 
 class SessionRunner:

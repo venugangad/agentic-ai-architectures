@@ -80,8 +80,10 @@ addopts      = "--cov=. --cov-report=term-missing"
 [tool.ruff]
 line-length    = 100
 target-version = "py311"
-select         = ["E", "F", "I", "UP", "B", "SIM"]
-ignore         = ["E501"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501", "UP042", "B904", "B905", "SIM102", "SIM110", "E402"]
 
 [tool.mypy]
 python_version         = "3.11"

@@ -12,15 +12,14 @@ Built in Chapter 2: The Core Agent Backbone
 
 from __future__ import annotations
 
-import asyncio
 import json
 import time
 import uuid
 from abc import ABC, abstractmethod
+from collections.abc import AsyncGenerator, Awaitable, Callable
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, AsyncGenerator, Callable, Awaitable
-
+from typing import Any
 
 # ──────────────────────────────────────────────
 # Event stream — what agents produce
@@ -160,7 +159,7 @@ class BaseAgent(ABC):
         self,
         name: str,
         description: str,
-        sub_agents: list["BaseAgent"] | None = None,
+        sub_agents: list[BaseAgent] | None = None,
     ) -> None:
         self.name = name
         self.description = description
@@ -179,26 +178,26 @@ class BaseAgent(ABC):
 
     # ── Hook registration ──
 
-    def add_before_agent(self, fn: BeforeAgentCallback) -> "BaseAgent":
+    def add_before_agent(self, fn: BeforeAgentCallback) -> BaseAgent:
         """Register a pre-run hook. Returns self for chaining."""
         self._before_agent.append(fn)
         return self
 
-    def add_after_agent(self, fn: AfterAgentCallback) -> "BaseAgent":
+    def add_after_agent(self, fn: AfterAgentCallback) -> BaseAgent:
         self._after_agent.append(fn)
         return self
 
-    def add_before_tool(self, fn: BeforeToolCallback) -> "BaseAgent":
+    def add_before_tool(self, fn: BeforeToolCallback) -> BaseAgent:
         self._before_tool.append(fn)
         return self
 
-    def add_after_tool(self, fn: AfterToolCallback) -> "BaseAgent":
+    def add_after_tool(self, fn: AfterToolCallback) -> BaseAgent:
         self._after_tool.append(fn)
         return self
 
     # ── Agent hierarchy ──
 
-    def find_agent(self, name: str) -> "BaseAgent | None":
+    def find_agent(self, name: str) -> BaseAgent | None:
         """Depth-first search for a named agent in this agent's hierarchy."""
         if self.name == name:
             return self
@@ -208,7 +207,7 @@ class BaseAgent(ABC):
                 return found
         return None
 
-    def clone(self) -> "BaseAgent":
+    def clone(self) -> BaseAgent:
         """
         Create a fresh instance with the same configuration.
         Used by the ParallelAgent (Chapter 7) to spawn independent workers.
@@ -407,7 +406,6 @@ class AgentPersona:
 # LlmAgent — the concrete ReAct implementation
 # ──────────────────────────────────────────────
 
-import re
 from core.llm import BaseLlm, LlmConfig, LlmMessage, MessageRole
 
 
@@ -440,7 +438,7 @@ class LlmAgent(BaseAgent):
         self._tools: list[Any] = tools or []
         self._config = config or LlmConfig(temperature=0.3, max_tokens=2048)
 
-    def clone(self) -> "LlmAgent":
+    def clone(self) -> LlmAgent:
         return LlmAgent(
             name=self.name,
             description=self.description,

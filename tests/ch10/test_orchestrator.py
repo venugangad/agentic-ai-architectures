@@ -1,19 +1,20 @@
 # tests/ch10/test_orchestrator.py — Chapter 10: Multi-Agent Orchestration
 from __future__ import annotations
 
-import asyncio
+from collections.abc import Callable
+
 import pytest
+
 from orchestration.orchestrator import (
-    TaskState,
-    AgentCard,
-    A2ATask,
     A2AResult,
+    A2ATask,
+    AgentCard,
     AgentRegistry,
     SupervisorAgent,
+    TaskState,
     agent_worker,
     tool_worker,
 )
-
 
 # ── AgentCard ────────────────────────────────────────────────────────────────
 
@@ -175,7 +176,7 @@ def _scripted_llm(plan_json: str, synthesis: str = "Final answer."):
     return ScriptedLLM()
 
 
-def _instant_worker(output: str) -> "Callable":
+def _instant_worker(output: str) -> Callable:
     async def _fn(task: A2ATask) -> A2AResult:
         return A2AResult(task_id=task.task_id, agent_id="w",
                          state=TaskState.COMPLETED, output=output)
@@ -275,7 +276,7 @@ class TestSupervisorAgent:
 
         registry = AgentRegistry()  # no workers registered
         supervisor = SupervisorAgent(llm=CapturingSynthesisLlm(), registry=registry)
-        result = await supervisor.run("Do something unknown")
+        await supervisor.run("Do something unknown")
         # Synthesis should have received the failure
         assert "✗" in results_seen.get("synthesis_input", "")
 

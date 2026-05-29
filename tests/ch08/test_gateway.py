@@ -2,25 +2,25 @@
 from __future__ import annotations
 
 import asyncio
-import pytest
 import time
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
+
+import pytest
 
 from core.gateway import (
     BudgetError,
-    RateLimitError,
-    CircuitOpenError,
-    GatewayConfig,
     CallBudget,
     CallRecord,
-    CostTracker,
-    TokenBucketRateLimiter,
     CircuitBreaker,
+    CircuitOpenError,
     CircuitState,
-    RetryPolicy,
+    CostTracker,
+    GatewayConfig,
     LlmGateway,
+    RateLimitError,
+    RetryPolicy,
+    TokenBucketRateLimiter,
 )
-
 
 # ── CallBudget ────────────────────────────────────────────────────────────────
 

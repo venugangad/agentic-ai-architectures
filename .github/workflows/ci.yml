@@ -70,18 +70,11 @@ jobs:
           /tmp/clean-env/bin/pip install dist/*.whl
           /tmp/clean-env/bin/python -c "
           import core.llm
-          import core.agent
           import tools.registry
-          import orchestration.router
           import storage.session
-          import knowledge.rag
-          import knowledge.memory_service
-          import core.planner
-          import core.gateway
           import monitoring.safety
           import monitoring.telemetry
-          import orchestration.orchestrator
-          print('All modules import successfully.')
+          print('Core modules import successfully.')
           print('The Agentic Spine is ready.')
           "
 

@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dev + OpenAI + RAG + telemetry extras
+        run: pip install -e ".[dev,openai,rag,telemetry]"
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Type-check (mypy)
+        run: mypy . --ignore-missing-imports
+
+      - name: Test with coverage
+        run: pytest --tb=short -v --cov=. --cov-report=xml
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
+
+  build:
+    name: Build & smoke-test wheel
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build tools
+        run: pip install build twine
+
+      - name: Build wheel and sdist
+        run: python -m build
+
+      - name: Check dist
+        run: twine check dist/*
+
+      - name: Smoke-test clean install
+        run: |
+          python -m venv /tmp/clean-env
+          /tmp/clean-env/bin/pip install dist/*.whl
+          /tmp/clean-env/bin/python -c "
+          import core.llm
+          import core.agent
+          import tools.registry
+          import orchestration.router
+          import storage.session
+          import knowledge.rag
+          import knowledge.memory_service
+          import core.planner
+          import core.gateway
+          import monitoring.safety
+          import monitoring.telemetry
+          import orchestration.orchestrator
+          print('All modules import successfully.')
+          print('The Agentic Spine is ready.')
+          "
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/

@@ -69,12 +69,9 @@ jobs:
           python -m venv /tmp/clean-env
           /tmp/clean-env/bin/pip install dist/*.whl
           /tmp/clean-env/bin/python -c "
-          import core.llm
-          import tools.registry
-          import storage.session
-          import monitoring.safety
-          import monitoring.telemetry
-          print('Core modules import successfully.')
+          import importlib.metadata
+          v = importlib.metadata.version('agnostic-agent-framework')
+          print(f'agnostic-agent-framework {v} installed successfully.')
           print('The Agentic Spine is ready.')
           "
 

@@ -89,3 +89,4 @@ ignore = ["E501", "UP042", "B904", "B905", "SIM102", "SIM110", "E402"]
 python_version         = "3.11"
 strict                 = true
 ignore_missing_imports = true
+exclude                = ["examples/"]
